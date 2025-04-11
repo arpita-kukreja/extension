@@ -1,28 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Deretention - YouTube Distraction Blocker",
+  "name": "YouTube Keyword Blocker",
   "version": "1.0",
-  "description": "Block YouTube videos based on keywords to stay focused.",
+  "description": "Blur YouTube videos based on keywords and block Shorts buttons and URLs.",
   "permissions": [
     "storage",
-    "scripting"
+    "activeTab"
   ],
-  "host_permissions": [
-    "https://www.youtube.com/*"
-  ],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
-      "js": ["content.js"],
-      "css": [],
-      "run_at": "document_start"
+      "matches": ["*://www.youtube.com/*"],
+      "js": ["libs/marked.min.js", "content.js"],
+      "run_at": "document_end"
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
